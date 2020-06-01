@@ -1,0 +1,535 @@
+﻿<Window x:Class="EasySave.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:EasySave.ViewModelNameSpace"
+        mc:Ignorable="d"
+        Title="EasySave" Height="750" Width="1300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Closing="closeWindow">
+
+    <Window.DataContext>
+        <viewModel:ViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="613"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF0C1B02" Offset="0.492"/>
+                <GradientStop Color="#FF084415" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <!-- ************************************************LEFT GRID*********************************************************** -->
+
+        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="46" Margin="42,34,0,0" TextWrapping="Wrap" Text="EasySave" VerticalAlignment="Top" Width="145" Background="Transparent" IsEnabled="False" BorderBrush="Transparent" SelectionBrush="Transparent" Foreground="White" FontFamily="Impact" FontSize="36"/>
+        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="42,80,0,0" TextWrapping="Wrap" Text="{ Binding TranslationList[0] }" VerticalAlignment="Top" Width="145" Background="Transparent" IsEnabled="False" BorderBrush="Transparent" SelectionBrush="Transparent" Foreground="White" FontFamily="Impact" FontSize="14" FontStyle="Italic"/>
+
+        <Rectangle Fill="#00E2E2E2" HorizontalAlignment="Left" Height="26" Margin="16,140,0,0" Stroke="#7FFFFFFF" VerticalAlignment="Top" Width="208"/>
+        <Label Content="MENU" HorizontalAlignment="Left" Margin="98,139,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.2,0.5" Foreground="#7FFFFFFF" Height="23" FontWeight="Bold"/>
+
+        <!-- ***************BACKUP TYPE***************** -->
+
+        <Label Content="{ Binding TranslationList[1] }" HorizontalAlignment="Left" Margin="16,167,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.2,0.5" Foreground="#7FFFFFFF"/>
+        <Rectangle Fill="#00E2E2E2" HorizontalAlignment="Left" Height="69" Margin="16,193,0,0" Stroke="#7FFFFFFF" VerticalAlignment="Top" Width="208"/>
+        <Button Content="{ Binding TranslationList[2] }" HorizontalAlignment="Left" Margin="27,202,0,0" VerticalAlignment="Top" Width="189" Command="{ Binding BackupModeCmd }" CommandParameter="mirror" RenderTransformOrigin="0.939,0.517" Background="White" Height="21">
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Visibility}" Value="Hidden">
+                            <Setter Property = "Button.IsEnabled" Value = "False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="{ Binding TranslationList[3] }" HorizontalAlignment="Left" Margin="27,231,0,0" VerticalAlignment="Top" Width="189" Command="{ Binding BackupModeCmd }" CommandParameter="differential" RenderTransformOrigin="0.613,0.363" Background="White" Height="21">
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger  Binding="{Binding Visibility}" Value="Visible">
+                            <Setter Property = "Button.IsEnabled" Value = "False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+        <!-- ***************CRYPTOSOFT INFORMATION***************** -->
+
+        <Label Content="{ Binding TranslationList[4] }" HorizontalAlignment="Left" Margin="16,272,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.2,0.5" Foreground="#7FFFFFFF"/>
+        <Rectangle Fill="#00E2E2E2" HorizontalAlignment="Left" Height="137" Margin="16,298,0,0" Stroke="#7FFFFFFF" VerticalAlignment="Top" Width="208"/>
+        <Label Content="{ Binding TranslationList[6] }" HorizontalAlignment="Left" Margin="27,303,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.2,0.5" Foreground="#7FFFFFFF"/>
+        <TextBox Margin="27,329,1110,0" TextWrapping="Wrap" Text="{Binding CryptField}" VerticalAlignment="Top" Height="20" Background="White"/>
+        <Button Content="{ Binding TranslationList[7] }" HorizontalAlignment="Left" Margin="169,329,0,0" VerticalAlignment="Top" Width="47" Height="20" Command="{Binding AddCmd}" CommandParameter="crypt" />
+        <DataGrid GridLinesVisibility="None" ItemsSource="{Binding CryptExtList}" HorizontalAlignment="Left" Height="70" Margin="27,349,0,0" VerticalAlignment="Top" Width="189" BorderBrush="#FFABADB3" IsReadOnly="true" AutoGenerateColumns="False" HeadersVisibility="None" ColumnWidth="93">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding}" CanUserReorder="False"/>
+                <DataGridTemplateColumn CanUserResize="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button HorizontalAlignment="Right" Width="20" Height="20" Content="x"
+                                Command="{Binding DataContext.RemoveCryptExtCmd, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"                         
+                                CommandParameter="{Binding}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.CellStyle>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Style.Triggers>
+                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                            <Setter Property="BorderBrush">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="Transparent"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground"
+                            Value="{DynamicResource
+                                   {x:Static SystemColors.ControlTextBrushKey}}"/>
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="Transparent"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+        </DataGrid>
+
+        <!-- ***************LANGUAGE***************** -->
+
+        <Label Content="{ Binding TranslationList[29] }" HorizontalAlignment="Left" Margin="16,443,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.2,0.5" Foreground="#7FFFFFFF"/>
+        <Rectangle Fill="#00E2E2E2" HorizontalAlignment="Left" Height="39" Margin="16,468,0,0" Stroke="#7FFFFFFF" VerticalAlignment="Top" Width="208"/>
+        <Button Command="{ Binding SwitchLanguageCmd }" Content="EN" CommandParameter="en" HorizontalAlignment="Left" Margin="72,470,0,0" VerticalAlignment="Top" Width="32" Height="32" Background="#7FFFFFFF" Foreground="Black" BorderBrush="Transparent">
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding LanguageValue}" Value="en">
+                            <Setter Property = "Button.IsEnabled" Value = "False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding LanguageValue}" Value="default">
+                            <Setter Property = "Button.IsEnabled" Value = "False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Command="{ Binding SwitchLanguageCmd }" CommandParameter="fr" Content="FR" HorizontalAlignment="Left" Margin="126,470,0,0" VerticalAlignment="Top" Width="32" Height="32" Background="#7FFFFFFF" Foreground="Black" BorderBrush="Transparent">
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding LanguageValue}" Value="fr">
+                            <Setter Property = "Button.IsEnabled" Value = "False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+        <Rectangle Fill="#00E2E2E2" HorizontalAlignment="Left" Height="129" Margin="16,540,0,0" Stroke="#7FFFFFFF" VerticalAlignment="Top" Width="208" Grid.RowSpan="2"/>
+
+        <TextBox IsEnabled="False" IsReadOnly="True" HorizontalAlignment="Left" Height="118" Margin="22,545,0,0" TextWrapping="Wrap" Text="{ Binding TranslationList[58] }" VerticalAlignment="Top" Width="194" Grid.RowSpan="2" Background="Transparent" BorderBrush="#00ABADB3" Foreground="White"/>
+
+        <Label Content="©EasySave 2020" HorizontalAlignment="Left" Margin="58,72,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.2,0.5" Foreground="#7FFFFFFF" Grid.Row="1"/>
+
+        <!-- ************************************************RIGHT GRID*********************************************************** -->
+
+        <Rectangle Fill="#FFF4F4F5" Height="672" Margin="242,49,0,0" Stroke="Black" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1052" Grid.RowSpan="2"/>
+
+        <!-- ***************BACKUP INFORMATION***************** -->
+
+        <Label Content="{Binding TranslationList[8]}" HorizontalAlignment="Left" Margin="269,83,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.2,0.5"/>
+
+        <Rectangle Fill="#FFE2E2E2" HorizontalAlignment="Left" Height="156" Margin="269,106,0,0" Stroke="Black" VerticalAlignment="Top" Width="527"/>
+
+        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="284,129,0,0" TextWrapping="Wrap" Text="{Binding TranslationList[9]}" VerticalAlignment="Top" Width="106"/>
+        <TextBox Margin="390,129,683,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Height="20" Background="White"/>
+
+        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="284,170,0,0" TextWrapping="Wrap" Text="{Binding TranslationList[10]}" VerticalAlignment="Top" Width="106"/>
+        <TextBox IsReadOnly="True" Margin="390,170,546,0" TextWrapping="Wrap" Text="{Binding SourcePath}" VerticalAlignment="Top" Height="20" Background="White"/>
+        <Button HorizontalAlignment="Right" Margin="0,170,520,0" VerticalAlignment="Top" Width="21" Command="{Binding OpenDirCmd}" CommandParameter="sourcePath" Background="White" Foreground="Transparent" BorderBrush="#FFABADB3" Height="20"/>
+
+        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="284,196,0,0" TextWrapping="Wrap" Text="{Binding TranslationList[11]}" VerticalAlignment="Top" Width="106" Visibility="{Binding Visibility}"/>
+        <TextBox IsReadOnly="True" Margin="390,196,546,0" TextWrapping="Wrap" Text="{Binding MirrorPath}" VerticalAlignment="Top" Height="20" Background="White" Visibility="{Binding Visibility}" />
+        <Button HorizontalAlignment="Right" Margin="0,196,520,0" VerticalAlignment="Top" Width="21" Command="{Binding OpenDirCmd}" CommandParameter="mirrorPath" Visibility="{Binding Visibility}" Background="White" Foreground="Transparent" BorderBrush="#FFABADB3" Height="20"/>
+
+        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="19" Margin="284,223,0,0" TextWrapping="Wrap" Text="{Binding TranslationList[12]}" VerticalAlignment="Top" Width="106"/>
+        <TextBox IsReadOnly="True" Margin="390,223,546,0" TextWrapping="Wrap" Text="{Binding TargetPath}" VerticalAlignment="Top" Height="19" Background="White"/>
+        <Button HorizontalAlignment="Right" Margin="0,223,520,0" VerticalAlignment="Top" Width="21" Command="{Binding OpenDirCmd}" CommandParameter="targetPath" Background="White" Foreground="Transparent" BorderBrush="#FFABADB3" Height="19"/>
+
+        <!-- ***************MAIN COMMANDS AND MESSAGE BOX***************** -->
+
+        <Rectangle Fill="#FFE2E2E2" HorizontalAlignment="Left" Height="81" Margin="269,279,0,0" Stroke="Black" VerticalAlignment="Top" Width="527" />
+
+        <Button Content="{ Binding TranslationList[7] }" HorizontalAlignment="Left" Margin="288,294,0,0" VerticalAlignment="Top" Width="76" Command="{Binding AddCmd}" CommandParameter="backup" RenderTransformOrigin="1.516,0.868" Height="20"/>
+
+        <Button Content="{Binding TranslationList[13]}" HorizontalAlignment="Left" Margin="379,294,0,0" VerticalAlignment="Top" Width="76" Command="{Binding LaunchCmd}" RenderTransformOrigin="0.284,1.667" Height="20">
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger  Binding="{Binding ListIsEmpty}" Value="True">
+                            <Setter Property = "UIElement.IsEnabled" Value = "False"/>
+                        </DataTrigger>
+                        <DataTrigger  Binding="{Binding ErrorMaxFileSize}" Value="True">
+                            <Setter Property = "UIElement.IsEnabled" Value = "False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="{ Binding TranslationList[14] }" HorizontalAlignment="Left" Margin="485,294,0,0" VerticalAlignment="Top" Width="146" Command="{Binding RemoveBackupCmd}" CommandParameter="selected" RenderTransformOrigin="0.313,0.625" Height="20">
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger  Binding="{Binding ListIsEmpty}" Value="True">
+                            <Setter Property = "UIElement.IsEnabled" Value = "False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="{ Binding TranslationList[15] }" HorizontalAlignment="Left" Margin="636,294,0,0" VerticalAlignment="Top" Width="146" Command="{Binding RemoveBackupCmd}" CommandParameter="finished" RenderTransformOrigin="0.313,0.625" Height="20">
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger  Binding="{Binding ListFinishedIsEmpty}" Value="True">
+                            <Setter Property = "UIElement.IsEnabled" Value = "False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+
+        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="288,327,0,0" TextWrapping="Wrap" Text="{Binding MessageText}" VerticalAlignment="Top" Width="494" Background="White" Foreground="{Binding MessageColor}" TextAlignment="Center" />
+
+        <!-- ***************OPTIONS***************** -->
+
+        <Label Content="{Binding TranslationList[16]}" HorizontalAlignment="Left" Margin="818,83,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.8,0.6"/>
+
+        <Rectangle Fill="#FFE2E2E2" Height="254" Margin="818,106,34,0" Stroke="Black" VerticalAlignment="Top"/>
+
+        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="836,121,0,0" TextWrapping="Wrap" Text="{ Binding TranslationList[17] }" VerticalAlignment="Top" Width="131"/>
+        <TextBox IsReadOnly="True" Margin="967,121,50,0" TextWrapping="Wrap" Text="{Binding LogsPath}" VerticalAlignment="Top" Height="20" Background="White"/>
+
+        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="836,146,0,0" TextWrapping="Wrap" Text="{ Binding TranslationList[19] }" VerticalAlignment="Top" Width="131"/>
+        <TextBox Margin="967,146,203,0" TextWrapping="Wrap" Text="{Binding MaxFileSizeField}" VerticalAlignment="Top" Height="20" Background="White"/>
+        <TextBox IsReadOnly="True" IsEnabled="False" Margin="1079,146,92,0" TextWrapping="Wrap" Text="{Binding MaxFileSize}" VerticalAlignment="Top" Height="20"/>
+        <Button Content="{ Binding TranslationList[7] }" HorizontalAlignment="Left" Margin="1189,146,0,0" VerticalAlignment="Top" Width="45" Height="20" Command="{Binding AddCmd}" CommandParameter="maxfilesize" />
+
+        <!-- *****PRIORITY EXT****** -->
+
+        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="836,177,0,0" TextWrapping="Wrap" Text="{ Binding TranslationList[18] }" VerticalAlignment="Top" Width="131"/>
+        <TextBox Text="{Binding PriorityField}" Margin="967,177,92,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Background="White"/>
+        <Button Content="{ Binding TranslationList[7] }" HorizontalAlignment="Left" Margin="1189,177,0,0" VerticalAlignment="Top" Width="45" Height="20" Command="{Binding AddCmd}" CommandParameter="priority"/>
+        <DataGrid GridLinesVisibility="None" ItemsSource="{ Binding PriorityExtList }" HorizontalAlignment="Left" Height="60" Margin="836,196,0,0" VerticalAlignment="Top" Width="398" BorderBrush="#FFABADB3" IsReadOnly="true" AutoGenerateColumns="False" HeadersVisibility="None" ColumnWidth="198">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding}" CanUserReorder="False"/>
+                <DataGridTemplateColumn CanUserResize="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button HorizontalAlignment="Right" Width="20" Height="20" Content="x"
+                                Command="{Binding DataContext.RemovePriorityExtCmd, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"                         
+                                CommandParameter="{Binding}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.CellStyle>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Style.Triggers>
+                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                            <Setter Property="BorderBrush">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="Transparent"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground"
+                            Value="{DynamicResource
+                                   {x:Static SystemColors.ControlTextBrushKey}}"/>
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="Transparent"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+        </DataGrid>
+
+        <!-- *****BUSINESS SOFT****** -->
+
+        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="836,267,0,0" TextWrapping="Wrap" Text="{Binding TranslationList[20]}" VerticalAlignment="Top" Width="131"/>
+        <TextBox Margin="967,267,92,0" TextWrapping="Wrap" Text="{Binding BusinessSoftField}" VerticalAlignment="Top" Height="20" Background="White"/>
+        <Button Content="{ Binding TranslationList[7] }" HorizontalAlignment="Left" Margin="1189,267,0,0" VerticalAlignment="Top" Width="45" Height="20" Command="{Binding AddCmd}" CommandParameter="businesssoft"  />
+        <DataGrid GridLinesVisibility="None" ItemsSource="{ Binding BusinessSoftList }" HorizontalAlignment="Left"  Height="60" Margin="836,286,0,0" VerticalAlignment="Top" Width="398" BorderBrush="#FFABADB3" IsReadOnly="true" AutoGenerateColumns="False" HeadersVisibility="None" ColumnWidth="198">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding}" CanUserReorder="False"/>
+                <DataGridTemplateColumn CanUserResize="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button HorizontalAlignment="Right" Width="20" Height="20" Content="x"
+                                Command="{Binding DataContext.RemoveBusinessSoftCmd, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"                         
+                                CommandParameter="{Binding}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.CellStyle>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Style.Triggers>
+                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                            <Setter Property="BorderBrush">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="Transparent"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground"
+                            Value="{DynamicResource
+                                   {x:Static SystemColors.ControlTextBrushKey}}"/>
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="Transparent"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+        </DataGrid>
+
+
+        <!-- ***************BACKUP LIST***************** -->
+
+        <DataGrid  Margin="269,374,34,26" Background="#FFD1D1D1" ItemsSource="{ Binding BackupList }" IsReadOnly="true" AutoGenerateColumns="False" BorderBrush="Black" x:Name="myDataGrid" Grid.RowSpan="2">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Binding="{Binding Name}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="{Binding DataContext.TranslationList[9], RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding Source}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="{Binding DataContext.TranslationList[21], RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding Mirror}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="{Binding DataContext.TranslationList[2], RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding Target}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="{Binding DataContext.TranslationList[22], RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        <TextBlock Text="{Binding DataContext.TranslationList[23], RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        <TextBlock Text="{Binding DataContext.TranslationList[24], RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <ProgressBar Value="{Binding Progress}" x:Name="progressBar"/>
+                                <TextBlock Text="{Binding Value, ElementName=progressBar, StringFormat=\{0:0\}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        <TextBlock Text="{Binding DataContext.TranslationList[25], RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Play"
+                                Command="{Binding DataContext.ResumeCmd, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"                         
+                                CommandParameter="{Binding Name}">
+                                <Button.Style>
+                                    <Style>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsStopped}" Value="True">
+                                                <Setter Property = "Button.IsEnabled" Value = "False"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding EventPauseState}" Value="False">
+                                                <Setter Property = "Button.IsEnabled" Value = "False"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsPausedBs}" Value="True">
+                                                <Setter Property = "Button.IsEnabled" Value = "False"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Progress}" Value="100">
+                                                <Setter Property = "Button.IsEnabled" Value = "False"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsRunned}" Value="False">
+                                                <Setter Property = "Button.IsEnabled" Value = "False"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        <TextBlock Text="{Binding DataContext.TranslationList[26], RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Pause"
+                                Command="{Binding DataContext.PauseCmd, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"                         
+                                CommandParameter="{Binding Name}">
+                                <Button.Style>
+                                    <Style>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsPausedBs}" Value="True">
+                                                <Setter Property = "Button.IsEnabled" Value = "False"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsPaused}" Value="True">
+                                                <Setter Property = "Button.IsEnabled" Value = "False"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Progress}" Value="100">
+                                                <Setter Property = "Button.IsEnabled" Value = "False"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsStopped}" Value="True">
+                                                <Setter Property = "Button.IsEnabled" Value = "False"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsRunned}" Value="False">
+                                                <Setter Property = "Button.IsEnabled" Value = "False"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        <TextBlock Text="{Binding DataContext.TranslationList[27], RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Stop" 
+                                Command="{Binding DataContext.StopCmd, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"                         
+                                CommandParameter="{Binding Name}">
+                                <Button.Style>
+                                    <Style>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Progress}" Value="100">
+                                                <Setter Property = "Button.IsEnabled" Value = "False"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsStopped}" Value="True">
+                                                <Setter Property = "Button.IsEnabled" Value = "False"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsRunned}" Value="False">
+                                                <Setter Property = "Button.IsEnabled" Value = "False"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        <TextBlock Text="{Binding DataContext.TranslationList[28], RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox IsReadOnly="True" Text="{Binding CurrentFile}" BorderBrush="#00434346"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+
+            <DataGrid.CellStyle>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Style.Triggers>
+                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                            <Setter Property="BorderBrush">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="Transparent"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground"
+                            Value="{DynamicResource
+                                   {x:Static SystemColors.ControlTextBrushKey}}"/>
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="Transparent"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type CheckBox}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsRunned}" Value="true">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{x:Null}" />
+                            <Setter Property="BorderBrush" Value="{x:Null}" />
+                        </Trigger>
+                        <DataTrigger Binding="{Binding IsStopped}" Value="True">
+                            <Setter Property="Background" Value="Red"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding EventPauseState}" Value="True">
+                            <Setter Property="Background" Value="Yellow"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsPausedBs}" Value="True">
+                            <Setter Property="Background" Value="Yellow"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Progress}" Value="100">
+                            <Setter Property="Background" Value="Green"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+
+        </DataGrid>
+
+
+    </Grid>
+
+</Window> 

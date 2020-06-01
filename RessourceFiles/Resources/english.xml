@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<words>
+  
+  <word val="Backup software"/>
+
+  <word val="Backup type"/>
+  <word val="Mirror"/>
+  <word val="Differential"/>
+
+  <word val="CryptoSoft information"/>
+  <word val="Cryptosoft location"/>
+  <word val="Extensions to crypt "/>
+  <word val="Add"/>
+
+  <word val="Backup information"/>
+  <word val="Name"/>
+  <word val="Source repository"/>
+  <word val="Mirror repository"/>
+  <word val="Target repository"/>
+
+  <word val="Run"/>
+
+  <word val="Delete selection"/>
+  <word val="Delete finished works"/>
+
+  <word val="Options"/>
+  <word val="Logs location"/>
+  <word val="Priority Extentions"/>
+  <word val="Maximum transfer size"/>
+  <word val="Business software"/>
+
+  <word val="Source"/>
+  <word val="Target"/>
+  <word val="Selected"/>
+  <word val="Progress"/>
+  <word val="Resume"/>
+  <word val="Pause"/>
+  <word val="Stop"/>
+  <word val="Current file"/> 
+
+  <word val="Language"/>
+  
+  <word val="Please, fill in all the fields"/>
+  <word val="The name contains forbidden characters"/>
+  <word val=" add to backup list"/>
+  <word val="A backup with the same name exists in the logs folder"/>
+  <word val="A backup with the same name exists in the list"/>
+  <word val="The selected backups have been launched"/>
+  <word val="No backup selected"/>
+  <word val="The language has been changed"/>
+  <word val="Please, fill in the field"/>
+  <word val="The extension has been successfully added"/>
+  <word val="The extension is already in the list"/>
+  <word val="The extension contains forbidden characters"/>
+  <word val="The business software has been successfully added"/>
+  <word val="The business software is already in the list"/>
+  <word val="The maximum transfer size must be an integer (kb)"/>
+  <word val="The maximum transfer size has been changed"/>
+
+  <word val="Finished or stopped backups have been deleted"/>
+
+  <word val="Mirror backup mode selected"/>
+  <word val="Differential backup mode selected"/>
+
+  <word val="The selected backups have been deleted"/>
+
+  <word val="Source and target folders are the same"/>
+  <word val="Target and mirror folders are the same"/>
+  <word val="A backup with the same source folder is already present in the list"/>
+  <word val="A backup with the same target folder is already present in the list"/>
+  <word val="The source folder is the same as the target folder of a backup already in the list"/>
+  <word val="The target folder is the same as the source folder of a backup already in the list"/>
+  <word val="This mirror folder is the same as the target folder of a backup already in the list"/>
+  <word val="The target folder is the same as the mirror folder of a backup already in the list"/>
+
+  <word val="The extensions to be encrypted, priority extensions and business software are specific to each backup. Please add them before adding a backup to the launch list."/>
+
+</words>

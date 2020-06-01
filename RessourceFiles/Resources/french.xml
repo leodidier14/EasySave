@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<words>
+
+  <word val="Logiciel de sauvegarde"/>
+
+  <word val="Type de sauvegarde"/>
+  <word val="Miroir"/>
+  <word val="Differentielle"/>
+
+  <word val="Informations CryptoSoft"/>
+  <word val="Emplacement du logiciel"/>
+  <word val="Extensions à crypter"/>
+  <word val="Ajouter"/>
+
+  <word val="Information de sauvegarde"/>
+  <word val="Nom"/>
+  <word val="Dossier source"/>
+  <word val="Dossier miroir"/>
+  <word val="Dossier cible"/>
+
+  <word val="Lancer"/>
+
+  <word val="Supprimer sélection"/>
+  <word val="Supprimer travaux finis"/>
+
+  <word val="Options"/>
+  <word val="Dossier logs"/>
+  <word val="Extentions prioritaires"/>
+  <word val="Taille maximum tranfert"/>
+  <word val="Logiciels métiers"/>
+
+  <word val="Source"/>
+  <word val="Cible"/>
+  <word val="Sélectionnée"/>
+  <word val="Progression"/>
+  <word val="Reprendre"/>
+  <word val="Pause"/>
+  <word val="Stop"/>
+  <word val="Fichier actuel"/>
+  
+  <word val="Langue"/>
+
+  <word val="Merci de remplir tous les champs"/>
+  <word val="Le nom contient des caractères interdits"/>
+  <word val=" ajouté à la liste de sauvegarde"/>
+  <word val="Une sauvegarde avec le même nom existe dans le dossier de Logs"/>
+  <word val="Une sauvegarde avec le même nom existe dans la liste"/>
+  <word val="Les sauvegardes sélectionnées ont été lancées"/>
+  <word val="Aucune sauvegarde sélectionnée"/>
+  <word val="La langue a été changée"/>
+  <word val="Merci de remplir le champ"/>
+  <word val="L'extension a été ajoutée avec succès"/>
+  <word val="L'extension existe déjà dans la liste"/>
+  <word val="L'extension contient des caractères interdits"/>
+  <word val="Le logiciel métier a été ajouté avec succès"/>
+  <word val="Le logiciel métier existe déjà dans la liste"/>
+  <word val="La taille maximale de transfert doit être un nombre entier (ko)"/>
+  <word val="La taille maximale de transfert a été changée"/>
+
+  <word val="Les sauvegardes finies ou stoppées ont été supprimées"/>
+
+  <word val="Mode de sauvegarde miroir sélectionné"/>
+  <word val="Mode de sauvegarde différentielle sélectionné"/>
+
+  <word val="Les sauvegardes sélectionnées ont été supprimées"/>
+  
+  <word val="Les dossiers source et cible sont les mêmes"/>
+  <word val="Les dossiers cible et miroir sont les mêmes"/>
+  <word val="Une sauvegarde avec le même dossier source est déjà dans la liste"/>
+  <word val="Une sauvegarde avec le même dossier cible est déjà dans la liste"/>
+  <word val="Le dossier source est le même que le dossier cible d'une sauvegarde déjà dans liste"/>
+  <word val="Le dossier cible est le même que le dossier source d'une sauvegarde déjà dans liste"/>
+  <word val="Le dossier miroir est le même que le dossier cible d'une sauvegarde déjà dans liste"/>
+  <word val="Le dossier cible est le même que le dossier miroir d'une sauvegarde déjà dans liste"/>
+  
+  <word val="Les extensions à crypter, les extensions prioritaires et les logiciels métier sont spécifiques à chaque sauvegarde. Veuillez les ajouter avant d'ajouter une sauvegarde à la liste de lancement."/>
+
+</words>
